@@ -2,41 +2,31 @@
 
 import sys
 
-def calculator(salary):
-	tax = salary - 3500
-	if salary <= 0:
-		return '0.00'
-	elif tax <= 1500:
-		x = 0.03
-		a = 0
-	elif tax <= 4500: 
-		x = 0.1
-		a = 105
-	elif tax <= 9000:
-		x = 0.2
-		a = 555
-	elif tax <= 35000:
-		x = 0.25
-		a = 1005
-	elif tax <= 00:
-		x = 0.3
-		a = 2755
-	elif tax <= 80000:
-		x = 0.35
-		a = 5505
-	else:
-		x = 0.45
-		a = 13505
-	payable =  tax * x - a
-	return format(payable, ".2f")
-
+def calculator():
+    for argv in sys.argv[1:]:
+        try:
+            num, z = argv.split(':')
+            z = int(z)
+        except:
+            print("Parameter Error")
+        m = z * 0.835 - 3500
+        if m <= 0:
+            tax = 0
+        elif m <= 1500:
+            tax = m * 0.03
+        elif m <= 4500:
+            tax = m * 0.1 - 105
+        elif m <= 9000:
+            tax = m * 0.2 - 555
+        elif m <= 35000:
+            tax = m * 0.25 - 1005
+        elif m <= 55000:
+            tax = m * 0.3 - 2755
+        elif m <= 80000:
+            tax = m * 0.35 - 5505
+        else:
+            tax = m *0.45 - 13505 
+        print("{}:{:.2f}".format(num, z * 0.835 - tax))
+    
 if __name__ == '__main__':
-	if len(sys.argv) == 2:
-		try:
-			salary = int(sys.argv[1])
-		except ValueError:
-			print("Parameter Error")
-		print(calculator(salary))
-	else:
-		print("Parameter Error")
-
+    calculator()
